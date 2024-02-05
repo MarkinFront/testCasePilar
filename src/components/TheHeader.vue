@@ -13,6 +13,17 @@ const noResults = ref(false);
 // const darkMode = ref(true);
 const router = useRouter();
 
+const handleInput = () => {
+  noResults.value = false;
+  clearTimeout(debounce.value);
+  debounce.value = setTimeout(() => {
+    searchResults.value = [];
+    if (searchText.value) {
+      callApi();
+    }
+  }, 1000);
+};
+
 onMounted(() => {
   document.addEventListener("click", (e) => {
     if (target.value && target.value.contains(e.target) === false) {
@@ -188,7 +199,7 @@ function callApi() {
               @focus="searchIsOpen = true"
               @keydown="searchIsOpen = true"
               v-model="searchText"
-              @input="debounceSearch"
+              @input="handleInput"
               @keydown.enter="performGeneralSearch"
               type="text"
               class="dark:bg-gray-800 dark:border-0 border bg-slate-200 border-gray-400 text-sm rounded-full w-full md:w-64 px-4 pl-8 py-2 focus:outline-none focus:ring-1 focus:ring-gray-500"
