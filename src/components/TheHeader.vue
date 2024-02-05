@@ -193,8 +193,8 @@ function callApi() {
         class="ml-auto md:flex md:items-center md:px-0 px-10 md:pb-0 pb-10 md:static absolute md:w-auto w-full top-64 duration-300 ease-in"
         :class="[mobileMenuIsOpen ? 'left-0' : 'left-[-100%]']"
       >
-        <div class="flex flex-col md:flex-row">
-          <div class="relative mt-3 md:mt-0" ref="target">
+        <div class="relative mt-3 md:mt-0" ref="target">
+          <div class="relative">
             <input
               @focus="searchIsOpen = true"
               @keydown="searchIsOpen = true"
@@ -202,13 +202,16 @@ function callApi() {
               @input="handleInput"
               @keydown.enter="performGeneralSearch"
               type="text"
-              class="dark:bg-gray-800 dark:border-0 border bg-slate-200 border-gray-400 text-sm rounded-full w-full md:w-64 px-4 pl-8 py-2 focus:outline-none focus:ring-1 focus:ring-gray-500"
+              :class="[
+                'dark:bg-gray-800 dark:border-0 border bg-slate-200 border-gray-400 text-sm rounded-full w-full md:w-64 px-4 pl-8 py-2 focus:outline-none focus:ring-1 focus:ring-gray-500 shadow-md',
+                { 'mt-mobile-menu': mobileMenuIsOpen },
+              ]"
               placeholder="Search a movie..."
-              :class="{ 'shadow-md': searchIsOpen }"
             />
-            <div class="absolute top-0">
+            <div class="absolute top-1 left-2">
               <svg
-                class="fill-current w-4 text-gray-500 mt-2 ml-2"
+                class="fill-current w-4 text-gray-500 mt-2 ml-1"
+                :class="{ 'mt-mobile-menu': mobileMenuIsOpen }"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -217,7 +220,6 @@ function callApi() {
                 />
               </svg>
             </div>
-
             <svg
               v-show="toggleSpinner"
               class="absolute top-1 right-2 w-5 h-5 text-gray-400 fill-red-500 animate-spin dark:text-gray-600 dark:fill-amber-300"
@@ -234,11 +236,11 @@ function callApi() {
                 fill="currentFill"
               />
             </svg>
-
             <svg
               v-show="searchText.length && !toggleSpinner"
               @click="clearSearchText"
               class="absolute top-2 right-2 w-5 h-5 text-red-500 dark:text-amber-300 cursor-pointer"
+              :class="{ 'mt-mobile-menu': mobileMenuIsOpen }"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -304,5 +306,24 @@ function callApi() {
 
 .router-link-active:not(.logo) {
   color: #6b7280;
+}
+.absolute.top-2.left-2 {
+  top: 0.2rem; /* Ajuste conforme necessário para descer mais a lupa */
+}
+
+.mt-mobile-menu {
+  margin-top: 6.5rem;
+}
+.absolute.top-1.left-2 {
+  top: 0.1rem;
+}
+
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none;
+  }
+  .mt-10 {
+    margin-top: 6rem;
+  }
 }
 </style>
