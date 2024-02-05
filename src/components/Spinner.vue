@@ -8,9 +8,12 @@
 
 <script setup>
 import { ref, watch } from "vue";
+import { createPinia } from 'pinia';
 import { useSpinnerStore } from "../store/spinnerStore";
 
-const spinnerStore = useSpinnerStore();
+const pinia = createPinia();
+pinia.use();
+const spinnerStore = useSpinnerStore(pinia);
 const showSpinner = ref(spinnerStore.showSpinner);
 
 watch(
@@ -20,7 +23,6 @@ watch(
   }
 );
 </script>
-
 <style scoped>
 .hollow-dots-spinner {
   height: 30px; 

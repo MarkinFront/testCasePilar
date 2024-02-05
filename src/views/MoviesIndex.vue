@@ -15,7 +15,7 @@ onMounted(async () => {
   } catch (error) {
     console.error(error);
   } finally {
-    await new Promise((resolve) => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 600));
     spinnerStore.hide();
   }
 });
