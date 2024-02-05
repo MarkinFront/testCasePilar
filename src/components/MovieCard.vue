@@ -4,30 +4,39 @@ import { computed } from "vue";
 const props = defineProps({
   movie: Object,
   genres: Object,
+  status: String,
 });
 
-const posterPath = computed(() => {
-  if (props.movie.poster_path)
-    return "https://image.tmdb.org/t/p/w500/" + props.movie.poster_path;
-  else return "https://via.placeholder.com/300x450";
-});
+const posterPath = computed(() =>
+  props.movie?.poster_path
+    ? `https://image.tmdb.org/t/p/w500/${props.movie.poster_path}`
+    : "https://via.placeholder.com/300x450"
+);
 
 const movieGenres = computed(() =>
-  props.genres
-    .filter((genre) => props.movie.genre_ids.includes(genre.id))
-    .map((g) => g.name)
-    .join(", ")
+  props.genres && props.movie?.genre_ids
+    ? props.genres
+        .filter((genre) => props.movie.genre_ids.includes(genre.id))
+        .map((g) => g.name)
+        .join(", ")
+    : ""
 );
 
 const formatReleaseDate = computed(() =>
-  new Date(props.movie.release_date).toLocaleDateString("el-GR")
+  props.movie && props.movie.release_date
+    ? new Date(props.movie.release_date).toLocaleDateString("el-GR")
+    : ""
 );
 
-const voteAverage = computed(() => props.movie.vote_average || "N/A");
+const voteAverage = computed(() =>
+  props.movie?.vote_average ? props.movie.vote_average : "N/A"
+);
+
+const isError = computed(() => props.status === "error");
 </script>
 
 <template>
-  <router-link :to="`/movie/${movie.id}`">
+  <router-link v-if="!isError" :to="`/movie/${movie.id}`">
     <img
       :src="posterPath"
       :alt="`Poster of the ${movie.title} movie`"
@@ -36,6 +45,7 @@ const voteAverage = computed(() => props.movie.vote_average || "N/A");
   </router-link>
   <div class="mt-2">
     <router-link
+      v-if="movie"
       :to="`/movie/${movie.id}`"
       class="text-lg mt-2 hover:text-gray-300"
     >
@@ -62,6 +72,7 @@ const voteAverage = computed(() => props.movie.vote_average || "N/A");
     <div class="dark:text-gray-400 text-gray-500 text-sm">
       {{ movieGenres }}
     </div>
+    <div v-if="isError" class="error">Erro ao carregar o filme</div>
   </div>
 </template>
 
