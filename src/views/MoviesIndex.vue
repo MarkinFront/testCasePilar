@@ -93,7 +93,7 @@ const renderTemplate = ref(false);
           to="/all-trends"
           class="text-sm text-gray-500 hover:text-gray-700 transition"
           @click="handleShowMoreClick('Now Playing')"
-        >
+        > 
           Show More
         </router-link>
       </h2>
