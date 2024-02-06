@@ -196,28 +196,6 @@ const showModal = ref(false);
       </div>
     </div>
 
-    <div class="movie-images">
-      <div class="container mx-auto px-4 py-16">
-        <h2 class="dark:text-amber-300 text-red-500 text-4xl font-semibold">
-          Images
-        </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          <div v-for="image in movie.images.backdrops.slice(0, 9)" class="mt-8">
-            <a
-              :href="`https://image.tmdb.org/t/p/original/${image.file_path}`"
-              target="_blank"
-            >
-              <img
-                :src="`https://image.tmdb.org/t/p/w500/${image.file_path}`"
-                :alt="`Images of ${movie.title} movie`"
-                class="hover:opacity-75 transition ease-in-out duration-150"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div
       v-if="showModal"
       class="fixed top-0 left-0 w-full h-full flex items-center shadow-lg overflow-y-auto z-50"
