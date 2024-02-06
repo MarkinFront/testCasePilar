@@ -29,7 +29,6 @@ describe("TheHeader Component", () => {
   });
 
   afterEach(() => {
-    // Limpar a montagem após cada teste
     if (wrapper) {
       wrapper.unmount();
     }
@@ -164,28 +163,28 @@ describe("TheHeader Component", () => {
         plugins: [router],
       },
     });
-  
+
     // Define um texto de pesquisa simulado
     wrapper.vm.searchText = "test";
-  
+
     // Encontra o campo de pesquisa
     const searchInput = wrapper.find(".seu-campo-de-pesquisa"); // Substitua pela classe ou seletor correto
-  
+
     // Verifica se o campo de pesquisa foi encontrado antes de acionar o evento
     if (searchInput.exists()) {
       // Simula a pressão da tecla "Enter" no campo de pesquisa
       await searchInput.trigger("keydown.enter");
-  
+
       // Aguarda a próxima atualização do ciclo de vida
       await wrapper.vm.$nextTick();
-  
+
       // Verifica se a rota foi alterada para "search-results"
       expect(wrapper.vm.$route.name).toBe("search-results");
     } else {
       console.error("Campo de pesquisa não encontrado");
     }
   });
-  
+
   it("Executa a consulta com a query corretamente", async () => {
     // Monta o componente com o roteador mock
     wrapper = shallowMount(TheHeader, {
@@ -193,22 +192,22 @@ describe("TheHeader Component", () => {
         plugins: [router],
       },
     });
-  
+
     // Define um texto de pesquisa simulado
     const searchText = "test";
     wrapper.vm.searchText = searchText;
-  
+
     // Encontra o botão de pesquisa
     const searchButton = wrapper.find(".seu-botao-de-pesquisa"); // Substitua pela classe ou seletor correto
-  
+
     // Verifica se o botão de pesquisa foi encontrado antes de acionar o clique
     if (searchButton.exists()) {
       // Aciona o clique no botão de pesquisa
       await searchButton.trigger("click");
-  
+
       // Aguarda a próxima atualização do ciclo de vida
       await wrapper.vm.$nextTick();
-  
+
       // Verifica se a rota foi alterada para "search-results" com a query correta
       expect(wrapper.vm.$route.name).toBe("search-results");
       expect(wrapper.vm.$route.query.q).toBe(searchText);

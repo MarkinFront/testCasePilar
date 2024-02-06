@@ -18,14 +18,11 @@ describe("TvShowCard Component", () => {
           { id: 2, name: "Comedy" },
         ],
       },
-      global: {
-        // Inclua mocks ou plugins globais necessários
-      },
+      global: {},
     });
   });
 
   afterEach(() => {
-    // Desmontar o componente após cada teste
     if (wrapper) {
       wrapper.unmount();
     }
@@ -34,7 +31,4 @@ describe("TvShowCard Component", () => {
   it("Renderiza corretamente", () => {
     expect(wrapper.exists()).toBe(true);
   });
-
-  
-
 });

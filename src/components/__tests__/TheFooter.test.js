@@ -22,7 +22,6 @@ describe("TheFooter Component", () => {
       "https://www.themoviedb.org/documentation/api"
     );
 
-    // Limpe a montagem após o teste
     wrapper.unmount();
   });
 });

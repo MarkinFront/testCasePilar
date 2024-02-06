@@ -44,13 +44,12 @@ const setupIntersectionObserver = () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // Quando a última div da lista estiver visível, carregue mais filmes
         storeAllPopular.fetchMorePopularMovies();
       }
     });
   }, options);
 
-  const target = document.getElementById('lastMovieCard'); // Defina um ID na última div da lista
+  const target = document.getElementById('lastMovieCard'); 
   if (target) {
     observer.observe(target);
   }
