@@ -88,7 +88,14 @@ function callApi() {
 </script>
 
 <template>
-  <nav class="border-b dark:border-gray-800 border-gray-400 relative z-10">
+  <nav
+    class="border-b dark:border-gray-800 border-gray-400 relative z-10 bg-gray-900"
+    :class="{
+      'md:sticky md:top-0 md:shadow-lg': !mobileMenuIsOpen,
+      'fixed top-0 w-full': mobileMenuIsOpen,
+    }"
+    style="position: sticky; top: 0"
+  >
     <div class="container mx-auto py-5 px-5 md:flex">
       <router-link @click="mobileMenuIsOpen = false" to="/" class="mr-5">
         <img
@@ -193,8 +200,11 @@ function callApi() {
         class="ml-auto md:flex md:items-center md:px-0 px-10 md:pb-0 pb-10 md:static absolute md:w-auto w-full top-64 duration-300 ease-in"
         :class="[mobileMenuIsOpen ? 'left-0' : 'left-[-100%]']"
       >
-        <div class="relative mt-3 md:mt-0" :class="{ 'z-20': searchIsOpen && mobileMenuIsOpen }">
-      <div class="relative">
+        <div
+          class="relative mt-3 md:mt-0"
+          :class="{ 'z-20': searchIsOpen && mobileMenuIsOpen }"
+        >
+          <div class="relative">
             <input
               @focus="searchIsOpen = true"
               @keydown="searchIsOpen = true"
