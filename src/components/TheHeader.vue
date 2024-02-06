@@ -88,7 +88,7 @@ function callApi() {
 </script>
 
 <template>
-  <nav class="border-b dark:border-gray-800 border-gray-400">
+  <nav class="border-b dark:border-gray-800 border-gray-400 relative z-10">
     <div class="container mx-auto py-5 px-5 md:flex">
       <router-link @click="mobileMenuIsOpen = false" to="/" class="mr-5">
         <img
@@ -193,8 +193,8 @@ function callApi() {
         class="ml-auto md:flex md:items-center md:px-0 px-10 md:pb-0 pb-10 md:static absolute md:w-auto w-full top-64 duration-300 ease-in"
         :class="[mobileMenuIsOpen ? 'left-0' : 'left-[-100%]']"
       >
-        <div class="relative mt-3 md:mt-0" ref="target">
-          <div class="relative">
+        <div class="relative mt-3 md:mt-0" :class="{ 'z-20': searchIsOpen && mobileMenuIsOpen }">
+      <div class="relative">
             <input
               @focus="searchIsOpen = true"
               @keydown="searchIsOpen = true"
@@ -207,11 +207,13 @@ function callApi() {
                 { 'mt-mobile-menu': mobileMenuIsOpen },
               ]"
               placeholder="Search a movie..."
+              style="z-index: 1"
             />
             <div class="absolute top-1 left-2">
               <svg
-                class="fill-current w-4 text-gray-500 mt-2 ml-1"
-                :class="{ 'mt-mobile-menu': mobileMenuIsOpen }"
+                v-if="!mobileMenuIsOpen"
+                class="fill-current w-4 text-gray-500 mt-2 ml-1 icon-search"
+                :class="{ 'mt-mobile-menu': !mobileMenuIsOpen }"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -222,7 +224,7 @@ function callApi() {
             </div>
             <svg
               v-show="toggleSpinner"
-              class="absolute top-1 right-2 w-5 h-5 text-gray-400 fill-red-500 animate-spin dark:text-gray-600 dark:fill-amber-300"
+              class="absolute top-1 right-2 w-5 h-5 text-gray-400 fill-red-500 animate-spin dark:text-gray-600 dark:fill-amber-300 mt-search-mobile"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -255,7 +257,8 @@ function callApi() {
             </svg>
             <div
               v-show="searchText.length && searchIsOpen"
-              class="z-50 absolute dark:bg-gray-800 dark:border-0 border border-gray-400 bg-slate-200 text-sm rounded w-full md:w-64 mt-5"
+              class="absolute dark:bg-gray-800 dark:border-0 border border-gray-400 bg-slate-200 text-sm rounded w-full md:w-64 mt-5"
+              style="width: auto; z-index: 2"
             >
               <ul v-show="searchResults.length">
                 <li
@@ -308,12 +311,15 @@ function callApi() {
   color: #6b7280;
 }
 .absolute.top-2.left-2 {
-  top: 0.2rem; /* Ajuste conforme necessário para descer mais a lupa */
+  top: 0.8rem; /* Ajuste conforme necessário para descer mais a lupa */
+}
+.mt-search-mobile {
+  margin-top: 6.5rem; /* Ou ajuste conforme necessário */
+}
+.icon-search.mt-mobile-menu {
+  top: 0.8rem; /* Ajuste conforme necessário para descer mais a lupa no modo responsivo */
 }
 
-.mt-mobile-menu {
-  margin-top: 6.5rem;
-}
 .absolute.top-1.left-2 {
   top: 0.1rem;
 }
@@ -324,6 +330,15 @@ function callApi() {
   }
   .mt-10 {
     margin-top: 6rem;
+  }
+  .icon-search.mt-mobile-menu {
+    top: 0.8rem; /* Ajuste conforme necessário para descer mais a lupa no modo responsivo */
+  }
+  .mt-mobile-menu {
+    margin-top: 6.5rem;
+  }
+  .absolute.top-2.left-2 {
+    top: 0.8rem; /* Ajuste conforme necessário para descer mais a lupa */
   }
 }
 </style>
