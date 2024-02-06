@@ -1,6 +1,11 @@
 # Projeto Pillar - Test Case 
 
+--Sou eternamente grato por esta oportunidade, espero com muito alegria ser aprovado e já começar a fazer
+parte do sucesso que é vossa equipe ^^.--
+
 **Desenvolvido Por:** @MarkinFront
+**BlackWhite?** Empresa Fictícia Criada por mim.
+
 
 Projeto para recrutamento realizado por Marcos Vinicius.
 
@@ -13,9 +18,11 @@ Projeto para recrutamento realizado por Marcos Vinicius.
 - Tailwind
 
 ## Instalação 
-1. Execute o comando `npm install` ou `npm i` para baixar as dependências do projeto.
-2. Adicione sua chave para a API TMDB no arquivo `.env` usando a variável `VITE_API_KEY`.
-3. Execute o comando `npm run dev` para iniciar o projeto.
+1. Primeiro Verifique se clonou o repositório de maneira correta!
+2. Execute o comando `npm install` ou `npm i` para baixar as dependências do projeto.
+3. Adicione sua chave para a API TMDB no arquivo `.env` usando a variável `VITE_API_KEY`.
+4. Execute o comando `npm run dev` para iniciar o projeto.
+5. Execute `npm run test` para iniciar os testes com **Vitest** 
 
 ## Requisitos
 Certifique-se de ter as versões mínimas recomendadas do Node.js e npm instaladas.
