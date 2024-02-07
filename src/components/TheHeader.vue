@@ -89,7 +89,7 @@ function callApi() {
 
 <template>
 <nav
-  class="border-b dark:border-gray-800 border-gray-400 relative z-10 bg-gray-900"
+  class="border-b dark:border-gray-800 border-gray-400 relative z-20 bg-gray-900"
   :class="{ 'md:sticky md:top-0 md:shadow-lg': !mobileMenuIsOpen, 'fixed top-0 w-full': mobileMenuIsOpen }"
   style="position: sticky; top: 0;"
 >
